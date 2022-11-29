@@ -16,7 +16,7 @@ def create():
     data = request.get_json()
 
     if People.exist(data.get('pname')):
-        return jsonify({"message": "User {pname} already exist".format(pname=data.get('pname'))}), 409
+        return jsonify({"message": f"User {data.get('pname')} already exist"}), 409
 
     new_people = People(
         pname=data.get('pname'),
