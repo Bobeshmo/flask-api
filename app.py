@@ -28,6 +28,20 @@ def create():
     return jsonify(data), 201
 
 
+@app.route('/<int:id>', methods=['PUT'])
+def update_recipe(id):
+    people = People.getById(id)
+    data = request.get_json()
+
+    people.pname = data.get('pname')
+    people.color = data.get('color')
+    db.session.commit()
+    serializer = PeopleSchema()
+    data = serializer.dump(people)
+
+    return jsonify(data), 200
+
+
 @app.route('/<int:id>', methods=['GET'])
 def getById(id):
     people = People.getById(id)
